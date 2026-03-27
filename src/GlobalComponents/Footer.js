@@ -4,7 +4,7 @@ import {
   FaEnvelope,
   FaPhoneAlt,
   FaMapMarkerAlt,
-  FaArrowRight,   // <-- new import for arrow icon
+  FaArrowRight,
 } from "react-icons/fa";
 import LogoB from "../assets/images/LogoB.png";
 
@@ -84,12 +84,7 @@ const Footer = () => {
                   Contact
                 </Link>
               </li>
-              <li>
-                <Link to="/about" style={styles.link}>
-                  About Us
-                </Link>
-              </li>
-              {/* --- NEW ADMIN LOGIN LINK --- */}
+              {/* About Us link removed */}
               <li>
                 <Link to="/admin/login" style={styles.link}>
                   Sign in
@@ -219,7 +214,7 @@ const styles = {
     fontSize: "0.9rem",
     lineHeight: "2",
     transition: "color 0.2s",
-    display: "inline-flex",      // to align icon inline with text
+    display: "inline-flex",
     alignItems: "center",
     gap: "6px",
   },

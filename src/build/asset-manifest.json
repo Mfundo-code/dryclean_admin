@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.js": "/static/js/main.55d32354.js",
+    "static/js/453.d91d534e.chunk.js": "/static/js/453.d91d534e.chunk.js",
+    "static/media/dry-cleaning-hero.jpg": "/static/media/dry-cleaning-hero.cd6c801a282532f033f2.jpg",
+    "static/media/LogoB.png": "/static/media/LogoB.05f851a8d42744669ea2.png",
+    "index.html": "/index.html",
+    "main.55d32354.js.map": "/static/js/main.55d32354.js.map",
+    "453.d91d534e.chunk.js.map": "/static/js/453.d91d534e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.55d32354.js"
+  ]
+}

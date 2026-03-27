@@ -1,7 +1,7 @@
 // src/Components/ServicesSection.jsx
 import React, { useState } from "react";
+import ContactFormModal from "../../../GlobalComponents/ContactFormModal"; // adjust path if necessary
 
-// Updated color palette
 const NAVY_DARK   = "#1E2A3A";
 const PRIMARY_BLUE = "#2C6B8F";
 const GOLD        = "#C9A53A";
@@ -18,7 +18,6 @@ const services = [
     description:
       "Professional dry cleaning for delicate fabrics and special garments. We use gentle solvents that preserve colour, texture, and shape.",
     bullets: ["Delicate fabric specialists", "Stain removal expertise", "Odour elimination"],
-    cta: "/services/dry-cleaning",
   },
   {
     id: 2,
@@ -27,7 +26,6 @@ const services = [
     description:
       "Drop off your laundry and we'll wash, dry, and fold it to perfection. Perfect for busy individuals and families.",
     bullets: ["Same-day service available", "Custom folding preferences", "Eco-friendly detergents"],
-    cta: "/services/wash-fold",
   },
   {
     id: 3,
@@ -36,7 +34,6 @@ const services = [
     description:
       "Get wrinkle-free, professionally pressed clothes that look crisp and fresh. We handle everything from shirts to trousers.",
     bullets: ["Shirts & blouses", "Suits & trousers", "Delicate pressing"],
-    cta: "/services/ironing",
   },
   {
     id: 4,
@@ -45,7 +42,6 @@ const services = [
     description:
       "Tough stains don't stand a chance. Our trained technicians treat spots and stains safely, even on delicate fabrics.",
     bullets: ["Wine, oil, ink, grass", "Pre-treatment consultation", "Safe for all fabrics"],
-    cta: "/services/stain-removal",
   },
   {
     id: 5,
@@ -54,7 +50,6 @@ const services = [
     description:
       "Your wedding dress deserves the best. We offer gentle cleaning, preservation, and archival packaging to keep it pristine for years.",
     bullets: ["Hand-inspected", "Acid-free packaging", "Heirloom preservation"],
-    cta: "/services/wedding-gown",
   },
   {
     id: 6,
@@ -63,142 +58,132 @@ const services = [
     description:
       "Reliable, high-volume laundry services for hotels, restaurants, and businesses. Custom pickup and delivery schedules available.",
     bullets: ["Linen & uniform service", "Flexible contracts", "Quick turnaround"],
-    cta: "/services/commercial",
   },
 ];
 
 const ServicesSection = () => {
   const [hovered, setHovered] = useState(null);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
+  const openContactModal = () => setIsContactModalOpen(true);
 
   return (
-    <section style={styles.section} aria-labelledby="services-heading">
-      <style>{`
-        @keyframes lift { from { transform: translateY(6px); opacity: 0 } to { transform: translateY(0); opacity: 1 } }
-        @keyframes popBlue {
-          0% { transform: translateY(12px) scale(0.98); opacity: 0; }
-          50% { transform: translateY(-6px) scale(1.02); opacity: 1; }
-          100% { transform: translateY(0) scale(1); opacity: 1; }
-        }
-        .heading-animate {
-          animation: popBlue 900ms cubic-bezier(.2,.9,.25,1) both;
-          color: ${NAVY_DARK};
-        }
-        @media (max-width: 980px) {
-          .services-grid { grid-template-columns: repeat(2, 1fr) !important; }
-        }
-        @media (max-width: 620px) {
-          .services-grid { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
+    <>
+      <section style={styles.section} aria-labelledby="services-heading">
+        <style>{`
+          @keyframes lift { from { transform: translateY(6px); opacity: 0 } to { transform: translateY(0); opacity: 1 } }
+          @keyframes popBlue {
+            0% { transform: translateY(12px) scale(0.98); opacity: 0; }
+            50% { transform: translateY(-6px) scale(1.02); opacity: 1; }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
+          }
+          .heading-animate {
+            animation: popBlue 900ms cubic-bezier(.2,.9,.25,1) both;
+            color: ${NAVY_DARK};
+          }
+          @media (max-width: 980px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          }
+          @media (max-width: 620px) {
+            .services-grid { grid-template-columns: 1fr !important; }
+          }
+        `}</style>
 
-      <div style={styles.container}>
-        <header style={styles.header}>
-          <h2 id="services-heading" className="heading-animate" style={styles.headingBig}>
-            Our Services
-          </h2>
-        </header>
+        <div style={styles.container}>
+          <header style={styles.header}>
+            <h2 id="services-heading" className="heading-animate" style={styles.headingBig}>
+              Our Services
+            </h2>
+          </header>
 
-        <div className="services-grid" style={styles.grid}>
-          {services.map((service, idx) => {
-            const isHovered = hovered === service.id;
-            return (
-              <article
-                key={service.id}
-                onMouseEnter={() => setHovered(service.id)}
-                onMouseLeave={() => setHovered(null)}
-                style={{
-                  ...styles.card,
-                  ...(isHovered ? styles.cardHovered : {}),
-                  animation: `lift 420ms cubic-bezier(.2,.9,.25,1) both`,
-                  animationDelay: `${idx * 60}ms`,
-                }}
-              >
-                {/* Gold top accent bar */}
-                <div style={{ ...styles.cardTopAccent, opacity: isHovered ? 1 : 0.5 }} />
+          <div className="services-grid" style={styles.grid}>
+            {services.map((service, idx) => {
+              const isHovered = hovered === service.id;
+              return (
+                <article
+                  key={service.id}
+                  onMouseEnter={() => setHovered(service.id)}
+                  onMouseLeave={() => setHovered(null)}
+                  style={{
+                    ...styles.card,
+                    ...(isHovered ? styles.cardHovered : {}),
+                    animation: `lift 420ms cubic-bezier(.2,.9,.25,1) both`,
+                    animationDelay: `${idx * 60}ms`,
+                  }}
+                >
+                  <div style={{ ...styles.cardTopAccent, opacity: isHovered ? 1 : 0.5 }} />
 
-                <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
-                  <div
-                    style={{
-                      ...styles.iconWrap,
-                      color: isHovered ? GOLD : PRIMARY_BLUE,
-                      background: isHovered ? `rgba(201,165,58,0.15)` : `rgba(44,107,143,0.1)`,
-                    }}
-                  >
-                    {/* Simple shirt icon SVG */}
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-                      <path d="M6 6.5L8 4h8l2 2.5-3 1.5-2-2-2 2-3-1.5z" />
-                      <path d="M8 7v11h8V7" />
-                    </svg>
-                  </div>
-
-                  <div style={{ flex: 1 }}>
-                    <div style={styles.tagRow}>
-                      <span style={{ ...styles.tag, color: isHovered ? GOLD : PRIMARY_BLUE }}>
-                        {service.tag}
-                      </span>
+                  <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
+                    <div
+                      style={{
+                        ...styles.iconWrap,
+                        color: isHovered ? GOLD : PRIMARY_BLUE,
+                        background: isHovered ? `rgba(201,165,58,0.15)` : `rgba(44,107,143,0.1)`,
+                      }}
+                    >
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+                        <path d="M6 6.5L8 4h8l2 2.5-3 1.5-2-2-2 2-3-1.5z" />
+                        <path d="M8 7v11h8V7" />
+                      </svg>
                     </div>
 
-                    <h3 style={styles.cardTitle}>{service.title}</h3>
-                    <p style={styles.cardDesc}>{service.description}</p>
+                    <div style={{ flex: 1 }}>
+                      <div style={styles.tagRow}>
+                        <span style={{ ...styles.tag, color: isHovered ? GOLD : PRIMARY_BLUE }}>
+                          {service.tag}
+                        </span>
+                      </div>
 
-                    <ul style={styles.bullets} aria-hidden={isHovered ? "false" : "true"}>
-                      {service.bullets.map((b, i) => (
-                        <li key={i} style={styles.bulletItem}>
-                          <span
-                            style={{
-                              ...styles.bulletDot,
-                              background: isHovered ? GOLD : PRIMARY_BLUE,
-                            }}
-                          />
-                          <span style={{ color: NAVY_DARK }}>{b}</span>
-                        </li>
-                      ))}
-                    </ul>
+                      <h3 style={styles.cardTitle}>{service.title}</h3>
+                      <p style={styles.cardDesc}>{service.description}</p>
 
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 8 }}>
-                      <a
-                        href={service.cta}
-                        style={{ ...styles.cardLink, color: isHovered ? GOLD : NAVY_DARK }}
-                        aria-label={`Learn more about ${service.title}`}
-                      >
-                        Learn more
-                        <svg
-                          width="14"
-                          height="14"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke={isHovered ? GOLD : NAVY_DARK}
-                          strokeWidth="2"
-                          style={{ marginLeft: 8, transform: isHovered ? "translateX(6px)" : "translateX(0)", transition: "transform 0.2s" }}
+                      <ul style={styles.bullets} aria-hidden={isHovered ? "false" : "true"}>
+                        {service.bullets.map((b, i) => (
+                          <li key={i} style={styles.bulletItem}>
+                            <span
+                              style={{
+                                ...styles.bulletDot,
+                                background: isHovered ? GOLD : PRIMARY_BLUE,
+                              }}
+                            />
+                            <span style={{ color: NAVY_DARK }}>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      {/* Replaced "Explore" button with "Place Order" */}
+                      <div style={{ marginTop: 16 }}>
+                        <button
+                          onClick={openContactModal}
+                          style={styles.orderButton}
+                          aria-label={`Place order for ${service.title}`}
                         >
-                          <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                      </a>
-                      <button
-                        onClick={() => (window.location.href = service.cta)}
-                        style={styles.ghostBtn}
-                        aria-label={`Explore ${service.title}`}
-                      >
-                        Explore
-                      </button>
+                          Place Order
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </article>
-            );
-          })}
-        </div>
+                </article>
+              );
+            })}
+          </div>
 
-        <div style={styles.bottomStrip}>
-          <p style={styles.stripText}>
-            Need special care or a custom solution? Our team is ready to help.
-          </p>
-          <a href="/contact" style={styles.stripButton}>
-            Contact us
-          </a>
+          <div style={styles.bottomStrip}>
+            <p style={styles.stripText}>
+              Need special care or a custom solution? Our team is ready to help.
+            </p>
+            <a href="/contact" style={styles.stripButton}>
+              Contact us
+            </a>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <ContactFormModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+      />
+    </>
   );
 };
 
@@ -273,24 +258,18 @@ const styles = {
   bullets: { listStyle: "none", padding: 0, margin: "12px 0 0", display: "grid", gap: 8 },
   bulletItem: { display: "flex", alignItems: "center", gap: 10, fontSize: 13 },
   bulletDot: { width: 6, height: 6, borderRadius: 6, flexShrink: 0 },
-  cardLink: {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: 6,
-    fontSize: 13,
-    fontWeight: 600,
-    textDecoration: "none",
-    transition: "color 0.2s",
-  },
-  ghostBtn: {
-    background: "transparent",
-    border: `1px solid ${GOLD}`,
-    padding: "6px 12px",
-    borderRadius: 8,
-    color: NAVY_DARK,
-    fontWeight: 700,
+  orderButton: {
+    background: PRIMARY_BLUE,
+    color: WHITE,
+    border: "none",
+    padding: "8px 16px",
+    fontSize: "0.9rem",
+    fontWeight: "bold",
+    borderRadius: 6,
     cursor: "pointer",
-    transition: "all 0.2s",
+    transition: "all 0.2s ease",
+    width: "100%",
+    boxShadow: "0 2px 6px rgba(44,107,143,0.3)",
   },
   bottomStrip: {
     marginTop: 28,
