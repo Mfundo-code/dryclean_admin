@@ -1,15 +1,17 @@
 {
   "files": {
     "main.css": "/static/css/main.e6c13ad2.css",
-    "main.js": "/static/js/main.4195c2b3.js",
+    "main.js": "/static/js/main.de749748.js",
     "static/js/453.d91d534e.chunk.js": "/static/js/453.d91d534e.chunk.js",
+    "static/media/dry-cleaning-hero.jpg": "/static/media/dry-cleaning-hero.cd6c801a282532f033f2.jpg",
+    "static/media/LogoB.png": "/static/media/LogoB.05f851a8d42744669ea2.png",
     "index.html": "/index.html",
     "main.e6c13ad2.css.map": "/static/css/main.e6c13ad2.css.map",
-    "main.4195c2b3.js.map": "/static/js/main.4195c2b3.js.map",
+    "main.de749748.js.map": "/static/js/main.de749748.js.map",
     "453.d91d534e.chunk.js.map": "/static/js/453.d91d534e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.4195c2b3.js"
+    "static/js/main.de749748.js"
   ]
 }
