@@ -3,9 +3,15 @@ from datetime import timedelta
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-0h_9-@-d0cx*u&pdo2u%xm1ax(kt57yrvq0^k)3zoga_ffn^)b'
-DEBUG = True
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+SECRET_KEY = 'django-insecure-0h_9-@-d0cx*u&pdo2u%xm1ax(kt57yrvq0^k)3zoga_ffn^)'
+
+DEBUG = False
+
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'drycleandemo.207.180.201.93.sslip.io',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -52,10 +58,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
+# ═══ PostgreSQL Database ═══
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'drycleandb',
+        'USER': 'dryclean',
+        'PASSWORD': 'Mfundo@1995',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -67,7 +78,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Johannesburg'
 USE_I18N = True
 USE_TZ = True
 
@@ -79,7 +90,28 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOW_ALL_ORIGINS = True   # For development only
+# ═══ CORS — restricted to production frontend only ═══
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGINS = [
+    "https://drycleandemo.207.180.201.93.sslip.io",
+    "http://localhost:3000",
+]
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE",
+    "OPTIONS",
+]
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "authorization",
+    "content-type",
+    "origin",
+    "x-requested-with",
+]
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.AllowAny'],
@@ -101,6 +133,6 @@ EMAIL_HOST          = 'smtp.gmail.com'
 EMAIL_PORT          = 587
 EMAIL_USE_TLS       = True
 EMAIL_HOST_USER     = 'mfundoknox@gmail.com'
-EMAIL_HOST_PASSWORD = 'wqsdayocqqyofrns' 
+EMAIL_HOST_PASSWORD = 'wqsdayocqqyofrns'
 SERVER_EMAIL        = 'mfundoknox@gmail.com'
 DEFAULT_FROM_EMAIL  = 'Lebowakgomo Dry-Cleaners <mfundoknox@gmail.com>'
